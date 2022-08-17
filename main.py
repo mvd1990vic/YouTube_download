@@ -27,7 +27,7 @@ def download_video(video_one):
         try:
             video_one.register_on_progress_callback(on_progress)
             videoStream = video_one.streams.filter(progressive=True, subtype="mp4").order_by("resolution").last()
-            videoStream.download(output_path=DOWNLOAD_DIR)
+            videoStream.download(output_path=DOWNLOAD_DIR, max_retries=10, timeout=500)
             is_download_video = True
         except:
             print('Загрузка видео не удалась. Пытаемся ещё разок', end='')
